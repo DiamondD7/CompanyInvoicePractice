@@ -90,9 +90,11 @@ const Register = () => {
             {success ?
                 <div>
                     <h1>Success!</h1>
+
                     <span>
-                        <a href="#">Sign in</a>
+                        <a href="/SignIn">Sign in</a>
                     </span>
+
                 </div>
                 :
 

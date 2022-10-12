@@ -33,6 +33,8 @@
 }
 
 
+
+
 /*-------------------------------------------Custom Bootstrap*/
 
 section {
@@ -112,6 +114,8 @@ section {
 .offscreen {
     display: none;
 }
+
+
 
 /*.validation--icon:hover + .offscreen{
     display:block;
