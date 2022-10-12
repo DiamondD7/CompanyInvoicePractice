@@ -13,5 +13,7 @@ namespace CompanyInvoicePractice.Data
 
         public DbSet<BookProp> BookProp { get; set; }
         public DbSet<CustomerDetails> CustomerDetails { get; set; }
+        public DbSet<RegisteredMembers> RegisteredMembers { get; set; }
+        
     }
 }
