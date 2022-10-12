@@ -7,6 +7,8 @@ const Register = () => {
     const userRef = useRef();
     const errRef = useRef();
 
+
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -61,131 +63,162 @@ const Register = () => {
             setErrMsg('Invalid Entry')
             return;
         }
+
+        fetch('https://localhost:7043/api/RegisteredMembers', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                FirstName: firstName,
+                LastName: lastName,
+                PhoneNumber: phoneNumber,
+                Email: email,
+                UserName: user,
+                PassW: pwd
+            })
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                setSuccess(true);
+            })
     }
     return (
         <section>
-            <form className="form" onSubmit={handleSubmit}>
-                <h1>Register</h1>
-
-                <label htmlFor="userfirstnameid" className="form--label">First name:</label>
-                <input className="form--input" id="userfirstnameid" type="text"
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-
-                <label htmlFor="userlastnameid" className="form--label">Last name:</label>
-                <input className="form--input" id="userlastnameid" type="text"
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-
-                <label htmlFor="userphoneid" className="form--label">Phone number:</label>
-                <input className="form--input" id="userphoneid" type="text"
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-
-                <label htmlFor="useremailid" className="form--label">Email:</label>
-                <input className="form--input" id="useremailid" type="text"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <label htmlFor="username" className="form--label">
-                    Username:
-                    <span className={validUser ? "valid" : "hide"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
+            {success ?
+                <div>
+                    <h1>Success!</h1>
+                    <span>
+                        <a href="#">Sign in</a>
                     </span>
+                </div>
+                :
 
-                    <span className={validUser || !user ? "hide" : "invalid"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </span>
-                </label>
-                <input className="form--input" id="username" type="text"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    required
-                    aria-invalid={validUser ? "false" : "true"}
-                    aria-describedby="uidnote"
-                    onFocus={() => setUserFocus(true)}
-                    onBlur={() => setUserFocus(false)}
-                />
+                <form className="form" onSubmit={handleSubmit}>
+                    <h1>Register</h1>
 
-                <p id="uidnote" className={userFocus && user && !validUser ? "instructions" : "offscreen"}>
-                    4 to 24 characters. <br />
-                    Must begin with a letter. <br />
-                    Letters, numbers, underscored, hyphens allowed.
-                </p>
-                
+                    <label htmlFor="userfirstnameid" className="form--label">First name:</label>
+                    <input className="form--input" id="userfirstnameid" type="text"
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
 
-                <label className="form--label">
-                    Password:
-                    <span className={validPwd ? "valid" : "hide"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                    </span>
+                    <label htmlFor="userlastnameid" className="form--label">Last name:</label>
+                    <input className="form--input" id="userlastnameid" type="text"
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
 
-                    <span className={validPwd || !pwd ? "hide" : "invalid"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                    <label htmlFor="userphoneid" className="form--label">Phone number:</label>
+                    <input className="form--input" id="userphoneid" type="text"
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
 
-                    </span>
-                </label>
-                <input className="form--input" type="password"
-                    ref={userRef}
-                    onChange={(e) => setPwd(e.target.value)}
-                    required
-                    aria-invalid={validUser ? "false" : "true"}
-                    aria-describedby="pwdnote"
-                    onFocus={() => setPwdFocus(true)}
-                    onBlur={() => setPwdFocus(false)}
-                />
+                    <label htmlFor="useremailid" className="form--label">Email:</label>
+                    <input className="form--input" id="useremailid" type="text"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
 
-                <p id="pwdnote" className={pwdFocus && !validPwd ? "instructionsPwd" : "offscreen"}>
-                    8 to 24 characters. <br />
-                    Must include uppercase and lowercase letters, a number and a special character.<br />
-                    Allowed special characters: <span aria-label="exclamation mark">!</span>
-                    <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span>
-                    <span aria-label="dollar sign">$</span><span aria-label="percent">%</span>
-                </p>
+                    <label htmlFor="username" className="form--label">
+                        Username:
+                        <span className={validUser ? "valid" : "hide"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                        </span>
 
+                        <span className={validUser || !user ? "hide" : "invalid"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </span>
+                    </label>
+                    <input className="form--input" id="username" type="text"
+                        ref={userRef}
+                        autoComplete="off"
+                        onChange={(e) => setUser(e.target.value)}
+                        required
+                        aria-invalid={validUser ? "false" : "true"}
+                        aria-describedby="uidnote"
+                        onFocus={() => setUserFocus(true)}
+                        onBlur={() => setUserFocus(false)}
+                    />
 
-                <label className="form--label">
-                    Confirm Password:
-                    <span className={validPwd && validMatch && matchPwd ? "valid" : "hide"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                    </span>
-
-                    <span className={validPwd || validMatch || !matchPwd ? "hide" : "invalid"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-
-                    </span>
-                </label>
-                <input className="form--input" type="password"
-                    ref={userRef}
-                    id="confirm_pwd"
-                    onChange={(e) => setMatchPwd(e.target.value)}
-                    required
-                    aria-invalid={validMatch ? "false" : "true"}
-                    aria-describedby="confirmnote"
-                    onFocus={() => setMatchFocus(true)}
-                    onBlur={() => setMatchFocus(false)}
-                />
-                <p id="confirmnote" className={matchFocus && !validMatch ? "instructionsConfPwd" : "offscreen"}>
-                    Must match the first password input field
-                </p>
+                    <p id="uidnote" className={userFocus && user && !validUser ? "instructions" : "offscreen"}>
+                        4 to 24 characters. <br />
+                        Must begin with a letter. <br />
+                        Letters, numbers, underscored, hyphens allowed.
+                    </p>
 
 
-                <button className="btn btn-primary mt-5" disabled={!validUser || !validPwd || !validMatch ? true : false}>Confirm</button>
+                    <label className="form--label">
+                        Password:
+                        <span className={validPwd ? "valid" : "hide"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                        </span>
 
-            </form>
+                        <span className={validPwd || !pwd ? "hide" : "invalid"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+
+                        </span>
+                    </label>
+                    <input className="form--input" type="password"
+                        ref={userRef}
+                        onChange={(e) => setPwd(e.target.value)}
+                        required
+                        aria-invalid={validUser ? "false" : "true"}
+                        aria-describedby="pwdnote"
+                        onFocus={() => setPwdFocus(true)}
+                        onBlur={() => setPwdFocus(false)}
+                    />
+
+                    <p id="pwdnote" className={pwdFocus && !validPwd ? "instructionsPwd" : "offscreen"}>
+                        8 to 24 characters. <br />
+                        Must include uppercase and lowercase letters, a number and a special character.<br />
+                        Allowed special characters: <span aria-label="exclamation mark">!</span>
+                        <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span>
+                        <span aria-label="dollar sign">$</span><span aria-label="percent">%</span>
+                    </p>
+
+
+                    <label className="form--label">
+                        Confirm Password:
+                        <span className={validPwd && validMatch && matchPwd ? "valid" : "hide"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                        </span>
+
+                        <span className={validPwd || validMatch || !matchPwd ? "hide" : "invalid"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="validation--icon">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+
+                        </span>
+                    </label>
+                    <input className="form--input" type="password"
+                        ref={userRef}
+                        id="confirm_pwd"
+                        onChange={(e) => setMatchPwd(e.target.value)}
+                        required
+                        aria-invalid={validMatch ? "false" : "true"}
+                        aria-describedby="confirmnote"
+                        onFocus={() => setMatchFocus(true)}
+                        onBlur={() => setMatchFocus(false)}
+                    />
+                    <p id="confirmnote" className={matchFocus && !validMatch ? "instructionsConfPwd" : "offscreen"}>
+                        Must match the first password input field
+                    </p>
+
+
+                    <button className="btn btn-primary mt-5" disabled={!validUser || !validPwd || !validMatch ? true : false}>Confirm</button>
+
+                </form>
+            }
         </section>
     )
 }

@@ -4,7 +4,7 @@ const CustomerTable = () => {
     const [item, setItem] = useState([]);
 
     useEffect(() => {
-        fetch('https://localhost:7043/api/CustomerDetails')
+        fetch('https://localhost:7043/api/RegisteredMembers')
             .then(res => res.json())
             .then((data) => {
                 setItem(data)
@@ -38,7 +38,7 @@ const CustomerTable = () => {
                     {item.map((item,index) =>
                         <tr key={index}>
                             <td>{item.Id}</td>
-                            <td>{item.CustomerFirstName} {item.CustomerLastName}</td>
+                            <td>{item.FirstName} {item.LastName}</td>
                             <td>{item.PhoneNumber}</td>
                             <td>{item.Email}</td>
                             <td><button className="btn btn-success">Update</button></td>
