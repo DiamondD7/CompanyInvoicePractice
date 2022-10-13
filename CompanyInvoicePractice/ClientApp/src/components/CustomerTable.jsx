@@ -41,6 +41,7 @@ const CustomerTable = () => {
                             <td>{item.FirstName} {item.LastName}</td>
                             <td>{item.PhoneNumber}</td>
                             <td>{item.Email}</td>
+
                             <td><button className="btn btn-success">Update</button></td>
                             <td><button className="btn btn-danger">Delete</button></td>
                         </tr>

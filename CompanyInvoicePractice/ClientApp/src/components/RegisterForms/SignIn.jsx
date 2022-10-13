@@ -2,6 +2,35 @@
 
 
 const SignIn = () => {
+
+    const [user, setUser] = useState([]);
+
+    const [loggedUserName, setLoggedUserName] = useState('');
+    const [loggedPassword, setLoggedPassword] = useState('');
+
+
+    useEffect(() => {
+        fetch('https://localhost:7043/api/RegisteredMembers')
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                setUser(data)
+            })
+    }, [])
+
+    const checkDetails = () => {
+
+        for (let i = 0; i < user.length; i++) {
+            if (user[i].UserName === loggedUserName && user[i].PassW === loggedPassword) {
+                console.log('Successful login');
+                return;
+                
+            } else {
+                console.log('Incorrect credentials');
+            } 
+        }
+    }
+
     return (
         <>
             <section>
@@ -12,16 +41,16 @@ const SignIn = () => {
                         </svg>
 
                     </span>
-                    <input type="text" className="form--input mt-4" placeholder="Username" />
-                    <input type="password" className="form--input mt-3" placeholder="Password" />
+                    <input type="text" className="form--input mt-4" placeholder="Username" onChange={(e) => setLoggedUserName(e.target.value)} />
+                    <input type="password" className="form--input mt-3" placeholder="Password" onChange={(e) => setLoggedPassword(e.target.value)} />
 
-                    <button className="btn btn-primary mt-5">Sign in </button>
+                    <button className="btn btn-primary mt-5" onClick={checkDetails}>Sign in </button>
                     <a className="btn btn-outline-danger mt-2" href="/">Cancel </a>
 
                     <p>Click <a href="/Register">Here</a> to create a new account</p>
                 </form>
             </section>
-            
+
         </>
     )
 }

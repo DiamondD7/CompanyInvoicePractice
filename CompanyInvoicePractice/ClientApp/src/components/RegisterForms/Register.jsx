@@ -216,9 +216,12 @@ const Register = () => {
                         Must match the first password input field
                     </p>
 
-
+                    
                     <button className="btn btn-primary mt-5" disabled={!validUser || !validPwd || !validMatch ? true : false}>Confirm</button>
-
+                    <p>
+                        Already have an account?<br/>
+                        <span>Click <a href="/SignIn">here</a></span>
+                    </p>
                 </form>
             }
         </section>
