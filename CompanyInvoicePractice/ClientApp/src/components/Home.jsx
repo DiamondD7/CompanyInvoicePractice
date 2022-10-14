@@ -1,9 +1,12 @@
 ﻿import React, { useEffect, useState } from 'react';
 import bookpic from '../Images/deletesoonbooks.jpg';
 
-const Home = () => {
+const Home = (props) => {
 
     const [items, setItems] = useState([]);
+    const [userFirstName, setUserFirstName] = useState(props.loggedFirstName);
+    const [userLastName, setUserLastName] = useState(props.loggedLastName);
+
 
     useEffect(() => {
         fetch('https://localhost:7043/api/BookProps')
@@ -16,7 +19,9 @@ const Home = () => {
     }, [])
     return (
         <div>
-            <h1 className="text-center mt-5">Welcome to the Best Bookstore in the Web</h1>
+            {props ? <h1 className="text-center mt-5">Welcome {userFirstName} to the Best Bookstore in the Web</h1> :
+                <h1 className="text-center mt-5">Welcome to the Best Bookstore in the Web</h1>
+            }
 
             <div className="booksdiv">
                 {items.map((item) =>
