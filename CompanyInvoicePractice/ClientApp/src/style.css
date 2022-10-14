@@ -32,17 +32,62 @@
     margin-top: 100px;
 }
 
-
-
-
-/*-------------------------------------------Custom Bootstrap*/
-
-section {
+.navigation-list{
     display:flex;
-    justify-content:center;
-    align-content:center;
+    gap:40px;
+}
 
-    
+    .navigation-list li {
+        list-style: none;
+
+        border-radius: 5px;
+        padding: 7px;
+        margin-top: 15px;
+    }
+
+    .navigation-list li a:link, .navigation-list li a:visited{
+        text-decoration:none;
+        color:#1a759f;
+    }
+
+.btn-register{
+    background-color:#1a759f;
+    padding:10px;
+    border-radius:5px;
+
+    position:absolute;
+    top:8px;
+    right:130px;
+}
+.btn-register:link, .btn-register:visited {
+    text-decoration: none;
+    color: #DADADA;
+}
+
+.btn-signin {
+    position:absolute;
+    right:35px;
+    top:8px;
+
+    padding:10px;
+}
+
+.btn-signin:link, .btn-signin:visited{
+    text-decoration:none;
+    color:#1a759f;
+}
+
+.btn-signin:hover {
+    background-color: #1a759f;
+    color: #DADADA;
+    padding: 10px;
+    border-radius: 5px;
+}
+/*-------------------------------------------Custom Bootstrap*/
+section {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .form {

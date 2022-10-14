@@ -33,15 +33,18 @@ export default function App() {
     return (
         <div>
             <div className="d-flex justify-content-between">
-                <ul>
+                <ul className="navigation-list">
                     <li><a href="/">Home</a></li>
+                    <li>|</li>
                     <li><a href="/BookTable">Books</a></li>
+                    <li>|</li>
                     <li><a href="/CustomerTable">Members</a></li>
                 </ul>
 
-                <div className="mt-3 me-3">
-                    <a className="btn btn-primary" href="/Register">Register</a>
-                    <a className="btn btn-outline-primary ms-3" href="/SignIn">Sign in</a>
+                <div>
+                    <a className="btn-register" href="/Register">Register</a>
+                    
+                    <a className="btn-signin" href="/SignIn">Sign in</a>
                 </div>
             </div>
 
