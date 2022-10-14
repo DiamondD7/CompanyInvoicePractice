@@ -13,7 +13,20 @@ const CustomerTable = () => {
                 console.log(error);
             })
 
-    },[])
+    }, [])
+
+    const deleteItem = (id) => {
+        fetch('https://localhost:7043/api/RegisteredMembers/' + id, {
+            method: "DELETE",
+            headers: {
+                'Content-Type':'application/json'
+            }
+        })
+            .then(res => res)
+            .then((data) => {
+                console.log("Delete successful", data);
+            })
+    }
 
     return (
         <div>
@@ -43,7 +56,7 @@ const CustomerTable = () => {
                             <td>{item.Email}</td>
 
                             <td><button className="btn btn-success">Update</button></td>
-                            <td><button className="btn btn-danger">Delete</button></td>
+                            <td><button className="btn btn-danger" onClick={() => deleteItem(item.Id)}>Delete</button></td>
                         </tr>
                     )}
                 </tbody>
