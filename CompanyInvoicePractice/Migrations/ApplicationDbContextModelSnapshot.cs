@@ -43,7 +43,7 @@ namespace CompanyInvoicePractice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BookProp");
+                    b.ToTable("BookProp", (string)null);
                 });
 
             modelBuilder.Entity("CompanyInvoicePractice.Model.CustomerDetails", b =>
@@ -70,7 +70,7 @@ namespace CompanyInvoicePractice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerDetails");
+                    b.ToTable("CustomerDetails", (string)null);
                 });
 
             modelBuilder.Entity("CompanyInvoicePractice.Model.RegisteredMembers", b =>
@@ -107,7 +107,7 @@ namespace CompanyInvoicePractice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RegisteredMembers");
+                    b.ToTable("RegisteredMembers", (string)null);
                 });
 #pragma warning restore 612, 618
         }
