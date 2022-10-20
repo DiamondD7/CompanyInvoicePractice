@@ -22,17 +22,6 @@ const BookTable = () => {
             })
     }, [])
 
-    /*const refreshList = (i) => {
-        fetch('https://localhost:7043/api/BookProps')
-            .then(res => res.json())
-            .then((data) => {
-                setItems(data)
-                console.log(data);
-            }, (error) => {
-                console.log(error);
-            })
-    }*/
-
     const deleteItem = (id) => {
         fetch('https://localhost:7043/api/BookProps/' + id, {
             method: "DELETE",
@@ -47,21 +36,6 @@ const BookTable = () => {
 
         window.location.reload();
     }
-
-    /*const updateItem = (id) => {
-        fetch('https://localhost:7043/api/BookProps/' + id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(items)
-        })
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data);
-                setItems(data);
-            })
-    }*/
 
     const modalOn = (item,isOpen) => {
         setOpenModal(isOpen)
