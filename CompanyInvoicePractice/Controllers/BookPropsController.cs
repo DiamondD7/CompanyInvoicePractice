@@ -53,6 +53,7 @@ namespace CompanyInvoicePractice.Controllers
             }
 
             _context.Entry(bookProp).State = EntityState.Modified;
+            //_context.BookProp.Update(bookProp);
 
             try
             {
